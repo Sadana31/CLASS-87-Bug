@@ -3,7 +3,7 @@ import { StyleSheet, View, FlatList,Text } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements';
 import firebase from 'firebase';
 import MyHeader from '../components/MyHeader';
-
+import SwipeableFlatList from '../components/SwipeableFlatList';
 import db from '../config';
 
 export default class NotificationScreen extends Component{
@@ -58,7 +58,6 @@ export default class NotificationScreen extends Component{
       )
  }
 
-
   render(){
     return(
       <View style={styles.container}>
@@ -73,20 +72,13 @@ export default class NotificationScreen extends Component{
                 <Text style={{fontSize:25}}>You have no notifications</Text>
               </View>
             )
-            :(
-              <FlatList
-                keyExtractor={this.keyExtractor}
-                data={this.state.allNotifications}
-                renderItem={this.renderItem}
-              />
-            )
+            :(<SwipeableFlatList allNotifications={this.state.allNotifications}/>)
           }
         </View>
       </View>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container : {
